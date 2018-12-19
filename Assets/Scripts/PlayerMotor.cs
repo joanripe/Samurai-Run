@@ -7,6 +7,9 @@ public class PlayerMotor : MonoBehaviour
     private const float LANE_DISTANCE = 3.0f;
     [SerializeField] private float TURN_SPEED = 0.05f;
 
+    // funcionalidad
+    private bool isGameStarted = false;
+    
     // animaciones
     private Animator anim;
 
@@ -23,7 +26,12 @@ public class PlayerMotor : MonoBehaviour
         anim = GetComponent<Animator>();
 	}
 
-	private void Update(){
+	private void Update()
+    {
+        if (!isGameStarted)
+        {
+            return;
+        }
 
         // recoger la entrada para ver en que linea debemos estar
         if (MobileInput.Instance.SwipeLeft)
@@ -121,5 +129,11 @@ public class PlayerMotor : MonoBehaviour
             Vector3.down);
         Debug.DrawRay(groundRay.origin, groundRay.direction, Color.cyan, 1.0f);
         return Physics.Raycast(groundRay, 0.2f + 0.1f); // en el suelo = true, saltando = false
+    }
+
+    public void StartGame()
+    {
+        isGameStarted = true;
+        anim.SetBool("GameStarted", true);
     }
 }
