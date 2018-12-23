@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         motor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotor>();
- //       UpdateScores();
+        UpdateScores();
     }
 
     // Update is called once per frame

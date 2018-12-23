@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,6 +72,12 @@ public class PlayerMotor : MonoBehaviour
                 anim.SetTrigger("Salto");
                 verticalVelocity = jumpForce;
             }
+            else if (MobileInput.Instance.SwipeDown)
+            {
+                //slide
+                StartSliding();
+                Invoke("StopSliding", 1.0f); // ejecuta el metodo del primer parametro X segundos despues, segudo parametro = segundos
+            }
         }
         else
         {
@@ -97,6 +104,20 @@ public class PlayerMotor : MonoBehaviour
             transform.forward = Vector3.Lerp(transform.forward, dir, TURN_SPEED);
         }
         
+    }
+
+    private void StartSliding()
+    {
+        anim.SetBool("Sliding", true);
+        controller.height /= 2;
+        controller.center = new Vector3(controller.center.x, controller.center.y / 2, controller.center.z);
+    }
+
+    private void StopSliding()
+    {
+        anim.SetBool("Sliding", false);
+        controller.height *= 2;
+        controller.center = new Vector3(controller.center.x, controller.center.y * 2, controller.center.z);
     }
 
     private void MoveLane(bool _toRight)
@@ -135,5 +156,21 @@ public class PlayerMotor : MonoBehaviour
     {
         isGameStarted = true;
         anim.SetBool("GameStarted", true);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        switch (hit.gameObject.tag)
+        {
+            case "Obstacle":
+                Crash();
+                break;
+        }
+    }
+
+    private void Crash()
+    {
+        anim.SetTrigger("Death");
+        isGameStarted = false;
     }
 }
