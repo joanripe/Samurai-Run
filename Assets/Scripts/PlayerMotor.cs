@@ -41,7 +41,7 @@ public class PlayerMotor : MonoBehaviour
             return;
         }
 
-        if(Time.deltaTime - speedIncreaseLasTick > speedIncreaseTime)
+        if((Time.time - speedIncreaseLasTick) > speedIncreaseTime)
         {
             speedIncreaseLasTick = Time.time;
             speed += speedIncreaseAmount;
