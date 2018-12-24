@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
+    private const int COIN_SCORE_AMOUNT = 5;
+
     public static GameManager Instance { set; get; }
 
     private bool isGameStarted = false;
@@ -14,12 +16,16 @@ public class GameManager : MonoBehaviour
     // interfaz y campos de la interfaz
     public Text scoreText, coinText, modifierText;
     public float score, coinScore, modifierScore;
+    private int lastScore;
 
     private void Awake()
     {
         Instance = this;
+        modifierScore = 1;
         motor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotor>();
         UpdateScores();
+        coinText.text = coinScore.ToString("0");
+        scoreText.text = score.ToString("0");
     }
 
     // Update is called once per frame
@@ -30,20 +36,37 @@ public class GameManager : MonoBehaviour
             isGameStarted = true;
             motor.StartGame();
         }
+
+        if (isGameStarted)
+        {
+            //aumento de la puntuacion
+            score += (Time.deltaTime * modifierScore);
+            if(lastScore != (int)score)
+            {
+                lastScore = (int)score;
+                scoreText.text = score.ToString("0");
+            }
+            
+        }
+    }
+
+    public void GetCoin()
+    {
+        coinScore++;
+        coinText.text = coinScore.ToString("0");
+        score += COIN_SCORE_AMOUNT;
+        scoreText.text = score.ToString("0");
     }
 
     void UpdateScores()
     {
-        scoreText.text = score.ToString();
-        coinText.text = coinScore.ToString();
-        modifierText.text = modifierScore.ToString();
+        modifierText.text = "x" + modifierScore.ToString("0.0");
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateModifier (float _num)
     {
-        
+        modifierScore = 1.0f + _num;
+        UpdateScores();
     }
-
     
 }

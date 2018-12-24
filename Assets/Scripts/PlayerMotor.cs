@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
-    private const float LANE_DISTANCE = 3.0f;
+    private const float LANE_DISTANCE = 2.0f;
     [SerializeField] private float TURN_SPEED = 0.05f;
 
     // funcionalidad
@@ -14,17 +14,24 @@ public class PlayerMotor : MonoBehaviour
     // animaciones
     private Animator anim;
 
-    //movement
+    //movimiento
     private CharacterController controller;
  	[SerializeField] private float jumpForce = 4.0f;
 	[SerializeField] private float gravity = 12.0f;
 	[SerializeField] private float verticalVelocity;
-	[SerializeField] private float speed = 7.0f;
     private int desiredLane = 1; // 0 = izquierda, 1 = en medio, 2 = derecha
 
-	private void Start(){
+    //modificador de velocidad
+    [SerializeField] private float originalSpeed = 7.0f;
+    private float speed;
+    private float speedIncreaseLasTick;
+    private float speedIncreaseTime = 2.5f;
+    private float speedIncreaseAmount = 0.1f;
+
+    private void Start(){
 		this.controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        speed = originalSpeed;
 	}
 
 	private void Update()
@@ -32,6 +39,15 @@ public class PlayerMotor : MonoBehaviour
         if (!isGameStarted)
         {
             return;
+        }
+
+        if(Time.deltaTime - speedIncreaseLasTick > speedIncreaseTime)
+        {
+            speedIncreaseLasTick = Time.time;
+            speed += speedIncreaseAmount;
+
+            // cambiar el texto modifier
+            GameManager.Instance.UpdateModifier(speed - originalSpeed);
         }
 
         // recoger la entrada para ver en que linea debemos estar
