@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { set; get; }
 
+    public bool IsDead { set; get; }
     private bool isGameStarted = false;
     private PlayerMotor motor;
 
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
             motor.StartGame();
         }
 
-        if (isGameStarted)
+        if (isGameStarted && !IsDead)
         {
             //aumento de la puntuacion
             score += (Time.deltaTime * modifierScore);

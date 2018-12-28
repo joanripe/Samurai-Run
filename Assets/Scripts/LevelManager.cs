@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { set; get; }
 
-    private const bool SHOW_COLLIDER = true;
+    public bool SHOW_COLLIDER = true; //$$
 
     // spawn del nivel
     private const float DISTANCE_BEFORE_SPAWN = 100.0f;
@@ -38,37 +38,7 @@ public class LevelManager : MonoBehaviour
     //Gameplay
     private bool isMoving = false;
 
-    public Piece GetPiece (PieceType _pt, int visualIndex)
-    {
-        Piece p = pieces.Find(x => x.type == _pt && x.visualIndex == visualIndex && !x.gameObject.activeSelf);
-
-        if (p == null)
-        {
-            GameObject go = null;
-            if (_pt == PieceType.ramp)
-            {
-                go = ramps[visualIndex].gameObject;
-            }
-            else if (_pt == PieceType.longBlock)
-            {
-                go = longblocks[visualIndex].gameObject;
-            }
-            else if (_pt == PieceType.jump)
-            {
-                go = jumps[visualIndex].gameObject;
-            }
-            else if (_pt == PieceType.slide)
-            {
-                go = slides[visualIndex].gameObject;
-            }
-
-            go = Instantiate(go);
-            p = go.GetComponent<Piece>();
-            pieces.Add(p);
-        }
-
-        return p;
-    }
+ 
 
     private void Awake()
     {
@@ -84,6 +54,21 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < INITIAL_SEGMENTS; i++)
         {
             GenerateSegment();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
+        {
+            GenerateSegment();
+        }
+
+        if (amountOfActiveSegments >= MAX_SEGMENTS_ON_SCREEN)
+        {
+            segments[amountOfActiveSegments - 1].DeSpawn();
+            amountOfActiveSegments--;
         }
     }
 
@@ -166,10 +151,36 @@ public class LevelManager : MonoBehaviour
 
         return s;
     }
-
-    // Update is called once per frame
-    void Update()
+    public Piece GetPiece(PieceType _pt, int visualIndex)
     {
-        
+        Piece p = pieces.Find(x => x.type == _pt && x.visualIndex == visualIndex && !x.gameObject.activeSelf);
+
+        if (p == null)
+        {
+            GameObject go = null;
+            if (_pt == PieceType.ramp)
+            {
+                go = ramps[visualIndex].gameObject;
+            }
+            else if (_pt == PieceType.longBlock)
+            {
+                go = longblocks[visualIndex].gameObject;
+            }
+            else if (_pt == PieceType.jump)
+            {
+                go = jumps[visualIndex].gameObject;
+            }
+            else if (_pt == PieceType.slide)
+            {
+                go = slides[visualIndex].gameObject;
+            }
+
+            go = Instantiate(go);
+            p = go.GetComponent<Piece>();
+            pieces.Add(p);
+        }
+
+        return p;
     }
+
 }
