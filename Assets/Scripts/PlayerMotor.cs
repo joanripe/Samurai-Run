@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
-    private const float LANE_DISTANCE = 2.0f;
+    private const float LANE_DISTANCE = 2.5f;
     [SerializeField] private float TURN_SPEED = 0.05f;
 
     // funcionalidad

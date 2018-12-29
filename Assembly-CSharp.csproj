@@ -60,8 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BOXOPHOBIC\Polyverse - Skies\Scripts\PolyverseSkies.cs" />
     <Compile Include="Assets\Scripts\CameraMotor.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\MobileInput.cs" />
@@ -70,6 +72,8 @@
     <Compile Include="Assets\Scripts\PlayerMotor.cs" />
     <Compile Include="Assets\Scripts\Segment.cs" />
     <None Include="Assets\Japanese Coin\Environment\HDR_Readme.txt" />
+    <None Include="Assets\BOXOPHOBIC\Polyverse - Skies\Shaders\Polyverse Skies - Mobile.shader" />
+    <None Include="Assets\BOXOPHOBIC\Polyverse - Skies\Shaders\Polyverse Skies - Advanced.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/jose antonio/Documents/GitHub/Samurai-Run/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
