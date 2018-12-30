@@ -12,19 +12,17 @@ public class Coin : MonoBehaviour
         {
             GameManager.Instance.GetCoin();
             anim.SetTrigger("Collected");
-            Destroy(this.gameObject, 1.5f);
         }
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        anim.SetTrigger("Spawn");
     }
 }

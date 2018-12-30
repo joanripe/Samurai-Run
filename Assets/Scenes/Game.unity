@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAt: {fileID: 1930035915}
-  offset: {x: 0, y: 6, z: 0}
+  offset: {x: 0, y: 6, z: -6}
 --- !u!82 &734735421
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1192,6 +1192,7 @@ MonoBehaviour:
   - {fileID: 3719028154473014812, guid: a45cdc0163dc11e4da0246c25ef89a7e, type: 3}
   - {fileID: 4848629259998415397, guid: e71d85b5ec03c9942a987b8a7ed45561, type: 3}
   - {fileID: 415838595162323442, guid: fb89914efac4aea409049d7ddcbf8f3f, type: 3}
+  - {fileID: 4041337709676829698, guid: 8bc752482a534574ba4a71bf12cba99a, type: 3}
   availableTransitions:
   - {fileID: 701842032717152918, guid: 28724f4a9c5565a4eac21201d58794a8, type: 3}
   segments: []
