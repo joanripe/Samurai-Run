@@ -186,8 +186,9 @@ public class PlayerMotor : MonoBehaviour
 
     private void Crash()
     {
+        
         anim.SetTrigger("Death");
         isGameStarted = false;
-        GameManager.Instance.IsDead = true;
+        GameManager.Instance.OnDeath();
     }
 }
