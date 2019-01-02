@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayBtn()
     {
+        Debug.Log("error");
         UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
     }
     
