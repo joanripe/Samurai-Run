@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             isGameStarted = true;
             motor.StartGame();
+            FindObjectOfType<SidePropsSpawner>().IsScrolling = true;
         }
 
         if (isGameStarted && !IsDead)
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     public void OnDeath()
     {
         IsDead = true;
+        FindObjectOfType<SidePropsSpawner>().IsScrolling = false;
         deadScoreText.text = score.ToString("0");
         deadCoinText.text = coinScore.ToString("0");
         deathMenuAnim.SetTrigger("Death");

@@ -23,7 +23,7 @@ public class PlayerMotor : MonoBehaviour
 
     //modificador de velocidad
     [SerializeField] private float originalSpeed = 7.0f;
-    private float speed;
+    public float speed;
     private float speedIncreaseLasTick;
     private float speedIncreaseTime = 2.5f;
     private float speedIncreaseAmount = 0.1f;

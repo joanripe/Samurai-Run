@@ -23,6 +23,7 @@ public class CameraMotor : MonoBehaviour
     {
         Vector3 desiredPosition = lookAt.position + offset;
         desiredPosition.x = 0;
+        desiredPosition.y = offset.y;
         transform.position = Vector3.Lerp (transform.position, desiredPosition, (Time.deltaTime*4)); 
     }
 }
