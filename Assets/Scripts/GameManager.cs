@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     public bool IsDead { set; get; }
     private bool isGameStarted = false;
     private PlayerMotor motor;
+    public GameObject initialField;
 
     // interfaz y campos de la interfaz
+    public Animator gameCanvas;
     public Text scoreText, coinText, modifierText;
     public float score, coinScore, modifierScore;
     private int lastScore;
@@ -41,6 +43,9 @@ public class GameManager : MonoBehaviour
             isGameStarted = true;
             motor.StartGame();
             FindObjectOfType<SidePropsSpawner>().IsScrolling = true;
+            FindObjectOfType<CameraMotor>().IsMoving = true;
+            gameCanvas.SetTrigger("Show");
+            initialField.SetActive(false);
         }
 
         if (isGameStarted && !IsDead)
