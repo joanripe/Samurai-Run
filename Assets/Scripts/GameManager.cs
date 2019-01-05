@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject initialField;
 
     // interfaz y campos de la interfaz
-    public Animator gameCanvas;
+    public Animator gameCanvas, menuAnim, coinAnim;
     public Text scoreText, coinText, modifierText;
     public float score, coinScore, modifierScore;
     private int lastScore;
@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
         {
             isGameStarted = true;
             motor.StartGame();
-            FindObjectOfType<SidePropsSpawner>().IsScrolling = true;
-            FindObjectOfType<CameraMotor>().IsMoving = true;
-            gameCanvas.SetTrigger("Show");
-            initialField.SetActive(false);
+            FindObjectOfType<SidePropsSpawner>().IsScrolling = true;    // empezar a mover la decoracion lateral
+            FindObjectOfType<CameraMotor>().IsMoving = true;    //empezar a mover la camara
+            gameCanvas.SetTrigger("Show");  // mostrar el menu del juego
+            menuAnim.SetTrigger("Hide");    // ocultar el menu inicial
+            initialField.SetActive(false);  // desactivar la decoracion de la pantalla inicial
         }
 
         if (isGameStarted && !IsDead)
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void GetCoin()
     {
+        coinAnim.SetTrigger("Get");
         coinScore++;
         coinText.text = coinScore.ToString("0");
         score += COIN_SCORE_AMOUNT;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
     public void OnDeath()
     {
         IsDead = true;
+        gameCanvas.SetTrigger("Hide");
         FindObjectOfType<SidePropsSpawner>().IsScrolling = false;
         deadScoreText.text = score.ToString("0");
         deadCoinText.text = coinScore.ToString("0");
