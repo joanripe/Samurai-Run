@@ -1,6 +1,8 @@
 # Samurai-Run
 videojuego realizado para el proyecto de fin de grado del grado superior de desarrollo de aplicaciones multiplataforma
 
+las compilaciones se pueden encontrar en la carpeta build en formato apk lista para instalar en android
+
 elementos artisticos adquiridos en la store de unity
 - poligon samurai (https://assetstore.unity.com/packages/3d/environments/polygon-samurai-pack-89551)
 - poliverse skies (https://assetstore.unity.com/packages/vfx/shaders/polyverse-skies-low-poly-skybox-shaders-and-textures-104017)
