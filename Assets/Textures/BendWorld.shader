@@ -7,6 +7,8 @@ Shader "Custom/CurvedWorld" {
         _MainTex ("Base (RGB)", 2D) = "white" {}
         // Degree of curvature
         _Curvature ("Curvature", Float) = 0.001
+
+		_Color("Color", Color) =(1,1,1,1) // añadido, poder elegir el color en el editor de unity
     }
     SubShader {
         Tags { "RenderType"="Opaque" }
@@ -20,6 +22,7 @@ Shader "Custom/CurvedWorld" {
         // Access the shaderlab properties
         uniform sampler2D _MainTex;
         uniform float _Curvature;
+		fixed4 _Color;
  
         // Basic input structure to the shader function
         // requires only a single set of UV texture mapping coordinates
@@ -47,7 +50,7 @@ Shader "Custom/CurvedWorld" {
  
         // This is just a default surface shader
         void surf (Input IN, inout SurfaceOutput o) {
-            half4 c = tex2D (_MainTex, IN.uv_MainTex);
+            half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color; // añadido "* _Color" para poder elegir un color plano en el editor de unity
             o.Albedo = c.rgb;
             o.Alpha = c.a;
         }

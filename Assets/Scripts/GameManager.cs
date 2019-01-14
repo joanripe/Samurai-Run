@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     // interfaz y campos de la interfaz
     public Animator gameCanvas, menuAnim, coinAnim;
-    public Text scoreText, coinText, modifierText;
+    public Text scoreText, coinText, modifierText, hiscoreText;
     public float score, coinScore, modifierScore;
     private int lastScore;
 
@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         UpdateScores();
         coinText.text = coinScore.ToString("0");
         scoreText.text = score.ToString("0");
+
+        hiscoreText.text = PlayerPrefs.GetInt("Hiscore").ToString("0");
     }
 
     // Update is called once per frame
@@ -91,10 +93,17 @@ public class GameManager : MonoBehaviour
     public void OnDeath()
     {
         IsDead = true;
-        gameCanvas.SetTrigger("Hide");
-        FindObjectOfType<SidePropsSpawner>().IsScrolling = false;
-        deadScoreText.text = score.ToString("0");
-        deadCoinText.text = coinScore.ToString("0");
-        deathMenuAnim.SetTrigger("Death");
+        gameCanvas.SetTrigger("Hide");  // ocultar el menu de juego al morir
+        FindObjectOfType<SidePropsSpawner>().IsScrolling = false;   // busca los objetos con el componente SidePropsSpawner y pone si variable a falso
+        deadScoreText.text = score.ToString("0");   // obtener la puntuacion del gameMenu (int) y convertirla a string para postrarla en el menu de muerte
+        deadCoinText.text = coinScore.ToString("0");    // obtener las monedas del gameMenu (int) y convertirlas a string para postrarla en el menu de muerte
+        deathMenuAnim.SetTrigger("Death");  // activa la animacion de mostrar del menu de muerte
+
+        // comprobar si hemos conseguido la maxima puntuacion
+        if (score > PlayerPrefs.GetInt("Hiscore"))
+        {
+            float s = Mathf.Ceil(score); 
+            PlayerPrefs.SetInt("Hiscore", (int)s);
+        }
     }
 }
