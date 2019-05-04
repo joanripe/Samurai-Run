@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     private const float DISTANCE_BEFORE_SPAWN = 100.0f;
     private const int INITIAL_SEGMENTS = 10;
     private const int INITIAL_TRANSITION_SEGMENTS = 2;
-    private const int MAX_SEGMENTS_ON_SCREEN = 15;
+    private const int MAX_SEGMENTS_ON_SCREEN = 100;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
     private int continousSegments;
@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
     {
         SpawnSegment();
 
-        if (Random.Range(0f,1f) < (continousSegments * 0.25f))
+        if (Random.Range(0f,1f) < (continousSegments * 0.1f))
         {
             //Spawnear segmento de transicion
             continousSegments = 0;

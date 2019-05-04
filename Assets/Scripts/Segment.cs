@@ -7,7 +7,7 @@ public class Segment : MonoBehaviour
     public int SegId { set; get; }
     public bool transition;
 
-    public int lenght;
+    public int lenght = 10;
     public int beginY1, beginY2, beginY3;
     public int endY1, endY2, endY3;
 
@@ -15,6 +15,7 @@ public class Segment : MonoBehaviour
 
     private void Awake()
     {
+        lenght = 10;
         // añadimos al array todos los objetos hijo que tengan el componente "Piece"
         pieces = gameObject.GetComponentsInChildren<PieceSpawner>();
 

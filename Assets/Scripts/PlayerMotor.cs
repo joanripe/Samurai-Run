@@ -70,6 +70,8 @@ public class PlayerMotor : MonoBehaviour
             targetPosition += Vector3.right * LANE_DISTANCE;
         }
 
+       
+
         // vamos a calcular el vector de movimiento
         Vector3 moveVector = Vector3.zero;
         moveVector.x = (targetPosition - this.transform.position).normalized.x * speed;
@@ -111,6 +113,7 @@ public class PlayerMotor : MonoBehaviour
 
         //mover el personaje
         controller.Move(moveVector * Time.deltaTime);
+       
 
         // rotar el personaje hacia donde esta moviendose
         Vector3 dir = controller.velocity;
