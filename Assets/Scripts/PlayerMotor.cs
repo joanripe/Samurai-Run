@@ -44,7 +44,7 @@ public class PlayerMotor : MonoBehaviour
         if((Time.time - speedIncreaseLasTick) > speedIncreaseTime)
         {
             speedIncreaseLasTick = Time.time;
-            speed += speedIncreaseAmount;
+            //speed += speedIncreaseAmount;
 
             // cambiar el texto modifier
             GameManager.Instance.UpdateModifier(speed - originalSpeed);
